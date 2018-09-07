@@ -22,9 +22,21 @@ describe('WordTries', () => {
 
   describe('.get', () => {
     describe('when called with no args', () => {
-			it('returns an array', () => {
-				expect(testTries.get()).to.be.an('array')
-			})
-		})
+      it('returns an array', () => {
+        expect(testTries.get()).to.be.an('array')
+      })
+
+      it('contains each word in the string passed to the constructor', () => {
+        testString.split(/\W/).forEach(word => {
+          expect(testTries.get()).to.contain(word.toLowerCase())
+        })
+      })
+
+      it('contains each word exactly once', () => {
+        testString.split(/\W/).forEach(word => {
+          expect(testTries.get().filter(w => w === word).length).to.equal(1)
+        })
+      })
+    })
   })
 })

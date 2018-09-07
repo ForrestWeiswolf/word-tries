@@ -1,9 +1,16 @@
-function WordTries(){
+function WordTries(string, order){
+  this.wordFrequencies = {}
 
+  string.split(/\W/).forEach(word => {
+    this.wordFrequencies[word] = this.wordFrequencies[word] || 0
+    this.wordFrequencies[word] += 1
+  })
+
+  this.words = Object.keys(this.wordFrequencies)
 }
 
 WordTries.prototype.get = function(){
-  return []
+  return this.words
 }
 
-module.exports = buildWordTries
+module.exports = WordTries
