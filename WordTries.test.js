@@ -37,6 +37,11 @@ describe('WordTries', () => {
           expect(testTries.get().filter(w => w === word).length).to.equal(1)
         })
       })
+
+      it('is in order of frequency', () => {
+        testTries = new WordTries('a a b c c c')
+        expect(testTries.get()).to.deep.equal(['c', 'a', 'b'])
+      })
     })
   })
 })

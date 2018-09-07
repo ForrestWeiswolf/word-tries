@@ -6,7 +6,9 @@ function WordTries(string, order){
     this.wordFrequencies[word] += 1
   })
 
-  this.words = Object.keys(this.wordFrequencies)
+  this.words = Object.keys(this.wordFrequencies).sort((a, b) => {
+    return this.wordFrequencies[b] - this.wordFrequencies[a]
+  })
 }
 
 WordTries.prototype.get = function(){
