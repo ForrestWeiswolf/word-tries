@@ -43,5 +43,22 @@ describe('WordTries', () => {
         expect(testTries.get()).to.deep.equal(['c', 'a', 'b'])
       })
     })
+
+    describe('when called with a word', () => {
+      it('still returns an array', () => {
+        expect(testTries.get('be')).to.be.an('array')
+      })
+
+      it('contains words that appear after passed word (in the string passed to the constructor)', () => {
+        expect(testTries.get('be')).to.contain('light')
+        expect(testTries.get('be')).to.contain('life')
+        expect(testTries.get('be')).to.contain('fire')
+      })
+
+      it('is in order of how often they appear after passed word', () => {
+        testTries = new WordTries('a b a b a c')
+        expect(testTries.get('a')).to.deep.equal(['b', 'c'])
+      })
+    })
   })
 })
