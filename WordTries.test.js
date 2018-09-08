@@ -4,6 +4,8 @@ const WordTries = require('./index.js')
 describe('WordTries', () => {
   const testString =
     'We be light, we be life, we be fire. We sing electric flame, we rumble underground wind, we dance heaven!'
+
+  let testTries
   beforeEach(() => {
     testTries = new WordTries(testString, 1)
   })
