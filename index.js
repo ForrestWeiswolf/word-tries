@@ -19,10 +19,13 @@ function WordTries(words, order) {
   })
 
   this.words = Object.keys(this.wordFrequencies).sort((a, b) => {
-    this.wordFrequencies[a].nextWords = new WordTries(
-      Object.keys(this.wordFrequencies[a].nextWords)
-    )
     return this.wordFrequencies[b].count - this.wordFrequencies[a].count
+  })
+
+  Object.keys(this.wordFrequencies).forEach(word => {
+    this.wordFrequencies[word].nextWords = new WordTries(
+      Object.keys(this.wordFrequencies[word].nextWords)
+    )
   })
 }
 
