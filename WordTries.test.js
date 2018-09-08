@@ -53,6 +53,7 @@ describe('WordTries', () => {
         expect(testTries.get('be')).to.contain('light')
         expect(testTries.get('be')).to.contain('life')
         expect(testTries.get('be')).to.contain('fire')
+        expect(testTries.get('be').length).to.equal(3)
       })
 
       it('is in order of how often they appear after passed word', () => {
