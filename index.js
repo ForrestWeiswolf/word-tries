@@ -2,9 +2,8 @@ function WordTries(words, order) {
   this.wordFrequencies = {}
 
   if (typeof words === 'string') {
-    words = words.split(/\W/)
+    words = words.toLowerCase().split(/\W/)
   }
-
 
   words.forEach((word, idx) => {
     this.wordFrequencies[word] = this.wordFrequencies[word] || {
@@ -20,7 +19,9 @@ function WordTries(words, order) {
   })
 
   this.words = Object.keys(this.wordFrequencies).sort((a, b) => {
-    this.wordFrequencies[a].nextWords = new WordTries(Object.keys(this.wordFrequencies[a].nextWords))
+    this.wordFrequencies[a].nextWords = new WordTries(
+      Object.keys(this.wordFrequencies[a].nextWords)
+    )
     return this.wordFrequencies[b].count - this.wordFrequencies[a].count
   })
 }

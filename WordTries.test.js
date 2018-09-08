@@ -35,9 +35,15 @@ describe('WordTries', () => {
       })
 
       it('contains each word exactly once', () => {
-        testString.split(/\W/).forEach(word => {
+        testTries.get().forEach(word => {
           expect(testTries.get().filter(w => w === word).length).to.equal(1)
         })
+      })
+
+      it('ignores case', () => {
+        testTries = new WordTries('That that')
+
+        expect(testTries.get().length).to.equal(1)
       })
 
       it('is in order of frequency', () => {
