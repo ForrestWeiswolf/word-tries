@@ -1,4 +1,5 @@
-function WordTries(words, order) {
+function WordTries(words, depth) {
+  this.depth = depth
   this.wordFrequencies = {}
 
   if (typeof words === 'string') {
@@ -29,8 +30,15 @@ function WordTries(words, order) {
   })
 }
 
-WordTries.prototype.get = function(word) {
-  if (word) {
+WordTries.prototype.get = function(...words) {
+  if (words.length > this.depth) {
+    throw new Error(
+      `Cannot get with depth ${words.length} in a WordTries of depth ${
+        this.depth
+      }`
+    )
+  } else if (words.length === 1) {
+    const word = words[0]
     return this.wordFrequencies[word].nextWords.get()
   } else {
     return this.words

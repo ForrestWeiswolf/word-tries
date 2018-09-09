@@ -74,9 +74,11 @@ describe('WordTries', () => {
 
     describe('when called with more than one word', () => {
       it('throws an error if passed more words than the number passed to constructor', () => {
-        expect(testTries.get('we', 'be')).to.throw(
-          'Cannot get with depth 2 in a WordTries of depth 1'
-        )
+        function digTooDeep() {
+          testTries.get('we', 'be')
+        }
+
+        expect(digTooDeep).to.throw('Cannot get with depth 2 in a WordTries of depth 1')
       })
 
       it('still returns an array', () => {
