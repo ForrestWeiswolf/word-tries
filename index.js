@@ -6,15 +6,19 @@ function WordTries(words, depth) {
     words = words.toLowerCase().split(/\W/)
   }
 
-  words.forEach((word, idx) => {
+  let word
+  for (let i = 0; i < words.length; i++) {
+    word = words[i]
     this.add(word, false)
 
-    if (idx + 1 < words.length) {
-      const nextWords = this.wordFrequencies[word].nextWords
-      nextWords[words[idx + 1]] = nextWords[words[idx + 1]] || 0
-      nextWords[words[idx + 1]] += 1
+    for (let j = 1; j <= this.depth; j++) {
+      if (i + j < words.length) {
+        const nextWords = this.wordFrequencies[word].nextWords
+        nextWords[words[i + j]] = nextWords[words[i + j]] || 0
+        nextWords[words[i + j]] += 1
+      }
     }
-  })
+  }
 
   this.sort()
 
