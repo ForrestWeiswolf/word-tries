@@ -73,12 +73,14 @@ describe('WordTries', () => {
     })
 
     describe('when called with more than one word', () => {
-      it('throws an error if passed more words than the number passed to constructor', () => {
+      it("throws an error if passed more words than the WordTries' depth", () => {
         function digTooDeep() {
           testTries.get('we', 'be')
         }
 
-        expect(digTooDeep).to.throw('Cannot get with depth 2 in a WordTries of depth 1')
+        expect(digTooDeep).to.throw(
+          'Cannot get with depth 2 in a WordTries of depth 1'
+        )
       })
 
       it('still returns an array', () => {
@@ -93,11 +95,12 @@ describe('WordTries', () => {
       })
 
       it('still is in frequency order', () => {
-        testTries2 = new WordTries('a b c a b c a b d b d b d')
-        expect(testTries.get('a', 'b')).to.deep.equal(['c', 'd'])
+        testTries2 = new WordTries('a b c a b c a b d b d b d', 2)
+        expect(testTries2.get('a', 'b')).to.deep.equal(['c', 'd'])
       })
 
       it('works at depths greater than 2', () => {
+        testTries = new WordTries(testString, 5)
         expect(testTries.get('we', 'be', 'light', 'we', 'be')).to.deep.equal([
           'life',
         ])
