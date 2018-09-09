@@ -67,7 +67,7 @@ describe('WordTries', () => {
       })
 
       it('is in order of how often they appear after passed word', () => {
-        testTries = new WordTries('a b a b a c')
+        testTries = new WordTries('a b a b a c', 1)
         expect(testTries.get('a')).to.deep.equal(['b', 'c'])
       })
     })
