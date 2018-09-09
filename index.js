@@ -1,5 +1,5 @@
 function WordTries(words, depth) {
-  this.depth = depth
+  this.depth = depth || 0
   this.wordFrequencies = {}
 
   if (typeof words === 'string') {
@@ -50,7 +50,7 @@ WordTries.prototype.sort = function() {
 WordTries.prototype.add = function(word, sort = true) {
   this.wordFrequencies[word] = this.wordFrequencies[word] || {
     count: 0,
-    nextWords: {},
+    nextWords: this.depth > 1 ? new WordTries('', this.depth - 1) : {},
   }
 
   this.wordFrequencies[word].count += 1
