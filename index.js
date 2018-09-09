@@ -37,11 +37,12 @@ WordTries.prototype.get = function(...words) {
         this.depth
       }`
     )
-  } else if (words.length === 1) {
-    const word = words[0]
-    return this.wordFrequencies[word].nextWords.get()
   } else {
-    return this.words
+    let layer = this
+    words.forEach(word => {
+      layer = layer.wordFrequencies[word].nextWords
+    })
+    return layer.words
   }
 }
 
