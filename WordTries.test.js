@@ -5,9 +5,10 @@ describe('WordTries', () => {
   const testString =
     'We be light, we be life, we be fire. We sing electric flame, we rumble underground wind, we dance heaven!'
 
-  let testTries
+  let testTries, testTries2
   beforeEach(() => {
     testTries = new WordTries(testString, 1)
+    testTries2 = new WordTries(testString, 2)
   })
 
   it('is a function', () => {
@@ -58,15 +59,46 @@ describe('WordTries', () => {
       })
 
       it('contains words that appear after passed word (in the string passed to the constructor)', () => {
-        expect(testTries.get('be')).to.contain('light')
-        expect(testTries.get('be')).to.contain('life')
-        expect(testTries.get('be')).to.contain('fire')
-        expect(testTries.get('be').length).to.equal(3)
+        expect(testTries.get('we')).to.contain('be')
+        expect(testTries.get('we')).to.contain('sing')
+        expect(testTries.get('we')).to.contain('rumble')
+        expect(testTries.get('we')).to.contain('dance')
+        expect(testTries.get('we').length).to.equal(4)
       })
 
       it('is in order of how often they appear after passed word', () => {
         testTries = new WordTries('a b a b a c')
         expect(testTries.get('a')).to.deep.equal(['b', 'c'])
+      })
+    })
+
+    describe('when called with more than one word', () => {
+      it('throws an error if passed more words than the number passed to constructor', () => {
+        expect(testTries.get('we', 'be')).to.throw(
+          'Cannot get with depth 2 in a WordTries of depth 1'
+        )
+      })
+
+      it('still returns an array', () => {
+        expect(testTries2.get('we', 'be')).to.be.an('array')
+      })
+
+      it('contains words that appear after the sequence of passed words', () => {
+        expect(testTries2.get('we', 'be')).to.contain('light')
+        expect(testTries2.get('we', 'be')).to.contain('life')
+        expect(testTries2.get('we', 'be')).to.contain('fire')
+        expect(testTries2.get('we', 'be').length).to.equal(3)
+      })
+
+      it('still is in frequency order', () => {
+        testTries2 = new WordTries('a b c a b c a b d b d b d')
+        expect(testTries.get('a', 'b')).to.deep.equal(['c', 'd'])
+      })
+
+      it('works at depths greater than 2', () => {
+        expect(testTries.get('we', 'be', 'light', 'we', 'be')).to.deep.equal([
+          'life',
+        ])
       })
     })
   })
