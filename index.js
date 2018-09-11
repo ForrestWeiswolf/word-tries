@@ -22,12 +22,6 @@ function WordTries(words, depth) {
   }
 
   this.sort()
-
-  Object.keys(this.wordFrequencies).forEach(word => {
-    this.wordFrequencies[word].nextWords = new WordTries(
-      Object.keys(this.wordFrequencies[word].nextWords)
-    )
-  })
 }
 
 WordTries.prototype.get = function(...words) {
