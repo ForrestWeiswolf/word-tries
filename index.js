@@ -53,9 +53,13 @@ WordTries.prototype.sort = function() {
 }
 
 WordTries.prototype.add = function(word, sort = true) {
-  this.wordFrequencies[word] = this.wordFrequencies[word] || {
-    count: 0,
-    nextWords: this.depth > 1 ? new WordTries('', this.depth - 1) : {},
+  if (this.depth === 0) {
+    this.wordFrequencies[word] = this.wordFrequencies[word] || { count: 0 }
+  } else {
+    this.wordFrequencies[word] = this.wordFrequencies[word] || {
+      count: 0,
+      nextWords: this.depth > 0 ? new WordTries('', this.depth - 1) : {},
+    }
   }
 
   this.wordFrequencies[word].count += 1
