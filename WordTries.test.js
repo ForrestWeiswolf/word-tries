@@ -30,9 +30,12 @@ describe('WordTries', () => {
       })
 
       it('contains each word in the string passed to the constructor', () => {
-        testString.split(/\W/).filter(w => w !== '').forEach(word => {
-          expect(testTries.get()).to.contain(word.toLowerCase())
-        })
+        testString
+          .split(/\W/)
+          .filter(w => w !== '')
+          .forEach(word => {
+            expect(testTries.get()).to.contain(word.toLowerCase())
+          })
       })
 
       it('contains each word exactly once', () => {
@@ -105,8 +108,8 @@ describe('WordTries', () => {
       })
 
       it('still is in frequency order', () => {
-        testTries2 = new WordTries('a b c a b c a b d b d b d', 2)
-        expect(testTries2.get('a', 'b')).to.deep.equal(['c', 'd'])
+        testTries = new WordTries('a b c a b c a b d b d b d', 2)
+        expect(testTries.get('a', 'b')).to.deep.equal(['c', 'd'])
       })
 
       it('works at depths greater than 2', () => {
