@@ -3,7 +3,8 @@ function WordTries(words, depth) {
   this.wordFrequencies = {}
 
   if (typeof words === 'string') {
-    words = words.toLowerCase().split(/\W+/).filter(w => w !== '')
+    words = words.toLowerCase().match(/\w+/g) || []
+    // could also use .split(/\W/).filter(w => w !== '')
   }
 
   let word
