@@ -12,11 +12,11 @@ function WordTries(words, depth) {
     word = words[i]
     this.add(word, false)
 
+    let layer = this.wordFrequencies
     for (let j = 1; j <= this.depth; j++) {
       if (i + j < words.length) {
-        const nextWords = this.wordFrequencies[word].nextWords
-        nextWords[words[i + j]] = nextWords[words[i + j]] || 0
-        nextWords[words[i + j]] += 1
+        const nextWords = layer[word].nextWords
+        nextWords.add(words[i + j])
       }
     }
   }
