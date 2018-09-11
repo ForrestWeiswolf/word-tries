@@ -51,6 +51,11 @@ describe('WordTries', () => {
         testTries = new WordTries('a a b c c c')
         expect(testTries.get()).to.deep.equal(['c', 'a', 'b'])
       })
+
+      it('works even when depth is > 0', () => {
+        testTries = new WordTries('a a b c c c', 2)
+        expect(testTries.get()).to.deep.equal(['c', 'a', 'b'])
+      })
     })
 
     describe('when called with a word', () => {
@@ -68,6 +73,11 @@ describe('WordTries', () => {
 
       it('is in order of how often they appear after passed word', () => {
         testTries = new WordTries('a b a b a c', 1)
+        expect(testTries.get('a')).to.deep.equal(['b', 'c'])
+      })
+
+      it('works even when depth is > 1', () => {
+        testTries = new WordTries('a b a b a c', 3)
         expect(testTries.get('a')).to.deep.equal(['b', 'c'])
       })
     })
