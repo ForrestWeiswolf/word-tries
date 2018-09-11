@@ -30,7 +30,7 @@ describe('WordTries', () => {
       })
 
       it('contains each word in the string passed to the constructor', () => {
-        testString.split(/\W/).forEach(word => {
+        testString.split(/\W/).filter(w => w !== '').forEach(word => {
           expect(testTries.get()).to.contain(word.toLowerCase())
         })
       })
