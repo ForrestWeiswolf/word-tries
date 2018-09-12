@@ -50,6 +50,13 @@ describe('WordTries', () => {
         expect(testTries.get().length).to.equal(1)
       })
 
+      it('counts an apostrophe as part of a word', () => {
+        testTries = new WordTries(`That's that`)
+
+        expect(testTries.get()).to.contain(`that's`)
+      })
+
+
       it('is in order of frequency', () => {
         testTries = new WordTries('a a b c c c')
         expect(testTries.get()).to.deep.equal(['c', 'a', 'b'])
