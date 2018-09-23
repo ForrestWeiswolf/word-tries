@@ -121,6 +121,14 @@ describe('WordTries', () => {
         expect(testTries2.get('we', 'be').length).to.equal(3)
       })
 
+      it('returns an empty array if passed sequence of words never appears', () => {
+        expect(testTries2.get('we', 'life')).to.deep.equal([])
+      })
+
+      it('returns an empty array if passed sequence of words appears only at the end', () => {
+        expect(testTries2.get('dance', 'heaven')).to.deep.equal([])
+      })
+
       it('still is in frequency order', () => {
         testTries = new WordTries('a b c a b c a b d b d b d', 2)
         expect(testTries.get('a', 'b')).to.deep.equal(['c', 'd'])
