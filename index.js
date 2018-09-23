@@ -36,9 +36,14 @@ WordTries.prototype.get = function(...words) {
     let result = this.words
 
     words.forEach(word => {
-      layer = layer.wordFrequencies[word].nextWords
-      result = layer.words
+      if(layer.wordFrequencies[word]){
+        layer = layer.wordFrequencies[word].nextWords
+        result = layer.words  
+      } else {
+        result = []
+      }
     })
+    
     return result
   }
 }

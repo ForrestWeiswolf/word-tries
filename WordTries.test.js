@@ -56,7 +56,6 @@ describe('WordTries', () => {
         expect(testTries.get()).to.contain(`that's`)
       })
 
-
       it('is in order of frequency', () => {
         testTries = new WordTries('a a b c c c')
         expect(testTries.get()).to.deep.equal(['c', 'a', 'b'])
@@ -79,6 +78,14 @@ describe('WordTries', () => {
         expect(testTries.get('we')).to.contain('rumble')
         expect(testTries.get('we')).to.contain('dance')
         expect(testTries.get('we').length).to.equal(4)
+      })
+
+      it('returns an empty array if passed word never appears', () => {
+        expect(testTries.get('Matthew')).to.deep.equal([])
+      })
+
+      it('returns an empty array if passed word appears only at the end', () => {
+        expect(testTries.get('heaven')).to.deep.equal([])
       })
 
       it('is in order of how often they appear after passed word', () => {
