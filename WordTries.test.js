@@ -73,7 +73,7 @@ describe('WordTries', () => {
         expect(testTries.get('be')).to.be.an('array')
       })
 
-      it('contains words that appear after passed word (in the string passed to the constructor)', () => {
+      it('contains words that appear after passed word (in string passed to the constructor)', () => {
         expect(testTries.get('we')).to.contain('be')
         expect(testTries.get('we')).to.contain('sing')
         expect(testTries.get('we')).to.contain('rumble')

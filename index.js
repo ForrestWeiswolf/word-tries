@@ -33,10 +33,13 @@ WordTries.prototype.get = function(...words) {
     )
   } else {
     let layer = this
+    let result = this.words
+
     words.forEach(word => {
       layer = layer.wordFrequencies[word].nextWords
+      result = layer.words
     })
-    return layer.words
+    return result
   }
 }
 
