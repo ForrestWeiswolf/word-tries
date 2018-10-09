@@ -16,7 +16,7 @@
     "url": "https://github.com/ForrestWeiswolf/build-word-tries/issues"
   },
   "homepage": "https://github.com/ForrestWeiswolf/build-word-tries#readme",
-  "dependencies": {
+  "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }
