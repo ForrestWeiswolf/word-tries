@@ -15,13 +15,13 @@ function WordTries(words, depth) {
     let layer = this.wordFrequencies[word].nextWords
     for (let j = 1; j <= this.depth; j++) {
       if (i + j < words.length) {
-        layer.add(words[i + j])
+        layer.add(words[i + j], false)
         layer = layer.wordFrequencies[words[i + j]].nextWords
       }
     }
   }
 
-  this.sort()
+  this.sort(true)
 }
 
 WordTries.prototype.get = function(...words) {
@@ -49,10 +49,16 @@ WordTries.prototype.get = function(...words) {
   }
 }
 
-WordTries.prototype.sort = function() {
+WordTries.prototype.sort = function(recursive) {
   this.words = Object.keys(this.wordFrequencies).sort((a, b) => {
     return this.wordFrequencies[b].count - this.wordFrequencies[a].count
   })
+
+  if(recursive && this.depth > 0){
+    Object.keys(this.wordFrequencies).forEach(key => {
+      this.wordFrequencies[key].nextWords.sort(true)
+    })
+  }
 }
 
 WordTries.prototype.add = function(word, sort = true) {
@@ -68,7 +74,7 @@ WordTries.prototype.add = function(word, sort = true) {
   this.wordFrequencies[word].count += 1
 
   if (sort) {
-    this.sort()
+    this.sort(false)
   }
 }
 
